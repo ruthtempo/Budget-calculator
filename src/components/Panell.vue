@@ -1,7 +1,20 @@
 <template>
     <div class="panel">
-        <NumericInput labelText="Nº de páginas" :value="pages" @onchange="$emit('onchangepages', $event, serviceIndex)" />
-        <NumericInput labelText="Nº de Idiomas"  :value="languages" @onchange="$emit('onchangelanguages', $event, serviceIndex)" />
+        <NumericInput
+            labelText="Nº de páginas"
+            :value="pages"
+            @onchange="$emit('onchangepages', $event)"
+            modalId="paginas"
+            modalText="En este componente debe indicar el núm de páginas que tendrá su sitio web"
+        />
+        <NumericInput 
+            labelText="Nº de Idiomas"  
+            :value="languages" 
+            @onchange="$emit('onchangelanguages', $event)" 
+            modalId="idiomas"
+            modalText="En este componente debe indicar el núm de idiomas que tendrá su sitio web"
+        />
+      
     </div>
 </template>
 <script>
@@ -12,7 +25,6 @@ export default {
     props:{
         pages: Number,
         languages:Number,
-        serviceIndex: Number,
     },
     components:{
         NumericInput

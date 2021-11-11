@@ -12,6 +12,10 @@
     </div>
   </div>
 </template>
+<script>
+// import List from "../src/components/PressupostList.vue"
+
+</script>
 
 <style>
 #root {
