@@ -40,7 +40,14 @@
       </form>
      </b-col>
       <b-col cols="4">
-        <List :budgetList="savedBudgetList" @onClickDelete="updateList" />
+        <List 
+        v-if="savedBudgetList.length > 0" 
+        :budgetList="savedBudgetList" 
+        @onClickDelete="updateList"
+        @onClickRestart="resetFilter" 
+        @onClickSortByCost="sortByCost"
+        @onSearch="sortBySearch"
+        @onClickSortAlphabetically="sortAlphabetically"/>
       </b-col>
   </b-row>
 </template>
@@ -121,6 +128,19 @@ export default {
         budget !== b
       )
       this.savedBudgetList = newList
+    },
+    resetFilter(){
+      
+      console.log("hola")
+    },
+    sortAlphabetically(){
+      this.savedBudgetList.sort((a,b)=>(a.name > b.name)? 1 :-1)
+    },
+    sortByCost(){
+      this.savedBudgetList.sort((a,b)=>(a.cost > b.cost)? 1 :-1)
+    }, 
+    sortBySearch(){
+      this.savedBudgetList.search(this.name)
     }
 
   },

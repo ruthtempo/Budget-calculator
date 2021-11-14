@@ -1,5 +1,16 @@
 <template>
     <div class="list"  >
+        <div>
+            <b-form-input id="type-search" 
+            type="search" 
+            placeholder="Buscar presupuesto..."
+            @change="$emit('onSearch', budgetList)"><label></label></b-form-input>
+            <b-button-group vertical>
+                <b-button @click="$emit('onClickSortByCost', budgetList)">Ordenar por Coste</b-button>
+                <b-button @click="$emit('onClickSortAlphabetically', budgetList)">Ordenar A-Z</b-button>
+                <b-button @click="$emit('onClickRestart', budgetList)">Reiniciar</b-button>
+            </b-button-group>
+        </div>
         <div :key="index" v-for="(budget, index) in budgetList">
             <ul class="listElements">
                 <li>Nombre del Presupuesto:{{budget.name}}</li>
@@ -46,5 +57,14 @@ export default {
     border-color:rgb(253, 25, 25);
 }
 
+.form-control{
+    margin-bottom:10px;
+}
+
+.btn-secondary{
+    background-color: orchid;
+    border-color:whitesmoke;
+    border-radius: 5px;
+}
 
 </style>
