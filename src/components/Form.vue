@@ -6,11 +6,11 @@
         <div class="formContent">
           <label>
             Nombre del Presupuesto
-            <input type="text" v-model="nombre" required />
+            <input type="text" v-model="nombre" />
           </label>
           <label>
             Cliente
-            <input type="text" v-model="client" required />
+            <input type="text" v-model="client" />
           </label>
           <h3>¿Qué quieres hacer?</h3>
           <div :key="index" v-for="(service, index) in services">
@@ -44,10 +44,7 @@
         v-if="savedBudgetList.length > 0" 
         :budgetList="savedBudgetList" 
         @onClickDelete="updateList"
-        @onClickRestart="resetFilter" 
-        @onClickSortByCost="sortByCost"
-        @onSearch="sortBySearch"
-        @onClickSortAlphabetically="sortAlphabetically"/>
+      />
       </b-col>
   </b-row>
 </template>
@@ -55,6 +52,18 @@
 <script>
 import Panell from "./Panell.vue";
 import List from "./PressupostList.vue";
+
+function  updateQuery(){
+  this.$router.replace({
+    query:{
+      pages: this.pages,
+      languages: this.languages,
+      pagina: this.selection.includes(0),
+      consultoria: this.selection.includes(1),
+      campana: this.selection.includes(2),
+    }
+  })
+}
 
 export default {
   name: "Form",
@@ -76,6 +85,11 @@ export default {
       client:"",
       nombre:"",
     };
+  },
+  watch: {
+    pages: updateQuery,
+    languages: updateQuery,
+    selection:updateQuery,
   },
   methods: {
     getTotal() {
@@ -129,19 +143,6 @@ export default {
       )
       this.savedBudgetList = newList
     },
-    resetFilter(){
-      
-      console.log("hola")
-    },
-    sortAlphabetically(){
-      this.savedBudgetList.sort((a,b)=>(a.name > b.name)? 1 :-1)
-    },
-    sortByCost(){
-      this.savedBudgetList.sort((a,b)=>(a.cost > b.cost)? 1 :-1)
-    }, 
-    sortBySearch(){
-      this.savedBudgetList.search(this.name)
-    }
 
   },
 };
