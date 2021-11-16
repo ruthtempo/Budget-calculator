@@ -60,7 +60,7 @@ function  updateQuery(){
       languages: this.languages,
       pagina: this.selection.includes(0),
       consultoria: this.selection.includes(1),
-      campana: this.selection.includes(2),
+      campaign: this.selection.includes(2),
     }
   })
 }
@@ -70,6 +70,25 @@ export default {
   components: {
     Panell,
     List,
+  },
+  mounted(){
+    this.pages = parseInt(this.$route.query.pages ?? 1)
+    this.languages = parseInt(this.$route.query.languages ?? 1)
+    
+    if(this.$route.query.pagina === "true"){
+      this.selection.push(0)
+    };
+
+     if(this.$route.query.consultoria === "true"){
+      this.selection.push(1)
+    };
+
+     if(this.$route.query.campaign === "true"){
+      this.selection.push(2)
+    };
+
+    // if it equals true in query , it checks the corresponding checkbox (push index into selection)
+    
   },
   data() {
     return {
